@@ -1,26 +1,76 @@
-import React from "react";
-import Hello from "./Hello";
-import Check from "./Check";
-import Select from "./Select";
-import NameForm from "./NameForm";
-import Popup from "./Popup";
-import Control from "./Control";
-import Wrapper from "./Wrapper";
+import React, { useRef, useState } from "react";
+import UserList from "./UserList";
+import CreateUser from "./CreateUser";
 function App() {
-  return (
-    <div>
-      <Hello name="react" color="red" isSpecial={true} />
-      <Hello />
+  const [inputs, setInputs] = useState({
+    username: "",
+    email: "",
+  });
 
-      <Check />
-      <Select />
-      <NameForm />
-      <Popup />
-      <Control />
-      <Wrapper>
-        <Hello name="yongari" color="blue" />
-      </Wrapper>
-    </div>
+  const { username, email } = inputs;
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      username: "velopert",
+      email: "public.velopert@gmail.com",
+    },
+    {
+      id: 2,
+      username: "tester",
+      email: "tester@example.com",
+    },
+    {
+      id: 3,
+      username: "liz",
+      email: "liz@example.com",
+    },
+  ]);
+
+  const nextId = useRef(4);
+
+  const onCreate = () => {
+    const user = {
+      id: nextId.current,
+      username,
+      email,
+    };
+    //spread 연산자 사용한 배열  추가
+    //setUsers([...users, user]);
+
+    //concat을 이용한 배열 추가
+    setUsers(users.concat(user));
+
+    setInputs({
+      username: "",
+      email: "",
+    });
+
+    nextId.current += 1;
+  };
+
+  const onRemove = (id) => {
+    setUsers(users.filter((user) => user.id !== id));
+  };
+
+  return (
+    <>
+      <CreateUser
+        username={username}
+        email={email}
+        onChange={onChange}
+        onCreate={onCreate}
+      />
+      <UserList users={users} onRemove={onRemove} />;
+    </>
   );
 }
 
