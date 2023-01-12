@@ -7,7 +7,8 @@ import React, {
 } from "react";
 import UserList from "./UserList";
 import CreateUser from "./CreateUser";
-import useInputs from "./hooks/useInputs";
+
+import produce from "immer";
 
 function countActiveUsers(users) {
   console.log("활성 사용자 세기");
@@ -41,22 +42,28 @@ const initialState = {
   ],
 };
 
+//immer의 사용법을 배우려고 다음코드를 변경한 것임
 function reducer(state, action) {
   switch (action.type) {
     case "CREATE_USER":
-      return {
-        users: state.users.concat(action.user),
-      };
+      return produce(state, (draft) => {
+        //users: state.users.concat(action.user),
+        draft.users.push(action.user);
+      });
     case "TOGGLE_USER":
-      return {
-        users: state.users.map((user) =>
-          user.id === action.id ? { ...user, active: !user.active } : user
-        ),
-      };
+      return produce(state, (draft) => {
+        const user = draft.users.find((user) => user.id === action.id);
+        user.active = !user.active;
+        //users: state.users.map((user) =>
+        // user.id === action.id ? { ...user, active: !user.active } : user
+      });
+
     case "REMOVE_USER":
-      return {
-        users: state.users.filter((user) => user.id !== action.id),
-      };
+      return produce(state, (draft) => {
+        const index = draft.users.findIndex((user) => user.id === action.id);
+        draft.users.splice(index, 1);
+        //users: state.users.filter((user) => user.id !== action.id),
+      });
     default:
       return state;
   }
@@ -99,6 +106,8 @@ function App() {
   // }, []);
 
   const count = useMemo(() => countActiveUsers(users), [users]);
+
+  //Immer 은 분명히 정말 편한 라이브러리인것은 사실입니다. 하지만, 확실히 알아둘 점은, 성능적으로는 Immer 를 사용하지 않은 코드가 조금 더 빠르다는 점 입니다.
   return (
     <>
       {/* Context를 만들면 Context안에 Provider라는 컴포넌트가 들어있는데 이 컴포넌트를 통하여 Context의 값을 정할 수 있다.  이 컴포넌트를 사용할 떄 value를 사용하면 됨  */}
