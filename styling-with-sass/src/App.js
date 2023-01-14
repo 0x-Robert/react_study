@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.scss";
 import Button from "./components/Button";
-
+import Box from "./Box";
 function App() {
   return (
     <div className="App">
-      <div className="buttons">
+      {/* <div className="buttons">
         <Button size="large" onClick={() => console.log("클릭됐다!")}>
           BUTTON
         </Button>
@@ -51,7 +51,8 @@ function App() {
         <Button size="large" color="pink" fullWidth>
           BUTTON
         </Button>
-      </div>
+      </div> */}
+      <Box />
     </div>
   );
 }
