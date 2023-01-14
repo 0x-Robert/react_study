@@ -56,13 +56,13 @@ const fullWidthStyle = css`
     css`
       width: 100%;
       justify-content: center;
-      & + & {
+      &:not(:first-child) selector {
         margin-left: 0;
         margin-top: 1rem;
       }
     `}
 `;
-
+//margin-left: 0;
 const StyledButton = styled.button`
   /* 공통 스타일 */
   display: inline-flex;
@@ -82,7 +82,7 @@ const StyledButton = styled.button`
   ${colorStyles}
 
   /* 기타 */
-  & + & {
+  &:not(:first-child) selector {
     margin-left: 1rem;
   }
 
