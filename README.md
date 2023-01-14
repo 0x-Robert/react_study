@@ -71,5 +71,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # react_study
 
+install
+
 yarn add react-icons
 yarn add styled-components
+yarn add polished
