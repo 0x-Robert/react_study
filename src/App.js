@@ -108,6 +108,7 @@ function App() {
   const count = useMemo(() => countActiveUsers(users), [users]);
 
   //Immer 은 분명히 정말 편한 라이브러리인것은 사실입니다. 하지만, 확실히 알아둘 점은, 성능적으로는 Immer 를 사용하지 않은 코드가 조금 더 빠르다는 점 입니다.
+  
   return (
     <>
       {/* Context를 만들면 Context안에 Provider라는 컴포넌트가 들어있는데 이 컴포넌트를 통하여 Context의 값을 정할 수 있다.  이 컴포넌트를 사용할 떄 value를 사용하면 됨  */}
