@@ -76,4 +76,5 @@ function TodoItem({ id, done, text }) {
 }
 
 //export default TodoItem;
+//다른 항목이 업데이트 되도 불필요한 리렌더링을 방지해서 성능을 최적화 할 수 있음.
 export default React.memo(TodoItem);
