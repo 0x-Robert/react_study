@@ -25,6 +25,11 @@ function reducer(state, action) {
   }
 }
 
+
+//두 가지 파라미터를 받아옵니다.
+//첫번째 파라미터는 API 요청을 시작하는 함수고 두번째 파라미터는 deps인데 이 deps 값은 해당 함수 안에서 사용하는 
+//useEffect의 deps로 설정됨
+
 function useAsync(callback, deps = [], skip = false) {
   const [state, dispatch] = useReducer(reducer, {
     loading: false,
