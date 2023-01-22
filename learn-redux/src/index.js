@@ -10,9 +10,11 @@ import {Provider} from "react-redux";
 import { createStore } from 'redux';
 import rootReducer from './modules';
 // 리덕스 스토어를 만드는 작업은 해당파일에서 해주기
+import {composeWithDevTools} from "redux-devtools-extension";
 
-const store = createStore(rootReducer);
-console.log(store.getState());
+const store = createStore(rootReducer, composeWithDevTools()); // 스토어를 만듭니다.
+//const store = createStore(rootReducer);
+//console.log(store.getState());
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
