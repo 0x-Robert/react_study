@@ -8,7 +8,6 @@ const WithRouterSample = () => {
     const navigate = useNavigate(); 
 
     return (
-
         <div>
              <h4>params </h4>
             <textarea value={JSON.stringify(params)} readOnly/>

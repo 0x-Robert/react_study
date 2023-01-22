@@ -73,7 +73,7 @@
 // export default User;
 
 
-import React, {useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {useUsersState, useUsersDispatch, getUser} from "./UsersContext";
 
 function User({id}){
