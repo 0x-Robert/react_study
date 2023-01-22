@@ -2,6 +2,8 @@ import React from 'react';
 import {Link, Route, Routes} from 'react-router-dom';
 import Profile from "./Profile";
 import WithRouterSample from './WithRouterSample';
+import RouterHookSample from './RoterHookSample';
+
 
 const Profiles = () => {
 
@@ -38,6 +40,7 @@ const Profiles = () => {
                 
             </Routes>
             <WithRouterSample/>
+            <RouterHookSample/>
         </div>
     )
 }
