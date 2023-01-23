@@ -12,7 +12,7 @@ import { createStore, applyMiddleware } from 'redux';
 //import myLogger from './middlewaress/myLogger';
 import logger from "redux-logger";
 import { composeWithDevTools } from 'redux-devtools-extension';
-
+import ReduxThunk from 'redux-thunk'; 
 
 //프로젝트에 리덕스를 적용할 때 index.js에서 루트리듀서를 불러와서 새로운 스토어를 만들고
 //provider를 사용해서 프로젝트에 적용함
@@ -22,7 +22,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(logger))
+  composeWithDevTools(applyMiddleware(ReduxThunk, logger))
 );
 
 
