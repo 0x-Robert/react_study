@@ -132,6 +132,34 @@ export const reducerUtils = {
 };
 
 
+// 비동기 관련 액션들을 처리하는 리듀서를 만들어줍니다.
+// type 은 액션의 타입, key 는 상태의 key (예: posts, post) 입니다.
+export const handleAsyncActions = (type, key, keepData=false ) => {
+  const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
+  return (state, action) => {
+    switch (action.type) {
+      case type:
+        return {
+          ...state,
+          [key]: reducerUtils.loading(keepData ? state[key].data: null )
+        };
+      case SUCCESS:
+        return {
+          ...state,
+          [key]: reducerUtils.success(action.payload)
+        };
+      case ERROR:
+        return {
+          ...state,
+          [key]: reducerUtils.error(action.payload)
+        };
+      default:
+        return state;
+    }
+  };
+};
+
+
 // 특정 id 를 처리하는 Thunk 생성함수
 const defaultIdSelector = param => param;
 export const createPromiseThunkById = (
@@ -147,7 +175,7 @@ export const createPromiseThunkById = (
 
   return param => async dispatch => {
     const id = idSelector(param);
-    dispatch({ type, meta: id });
+    dispatch({ type, param,  meta: id });
     try {
       const payload = await promiseCreator(param);
       dispatch({ type: SUCCESS, payload, meta: id });
@@ -190,33 +218,6 @@ export const handleAsyncActionsById = (type, key, keepData = false) => {
             ...state[key],
             [id]: reducerUtils.error(action.payload)
           }
-        };
-      default:
-        return state;
-    }
-  };
-};
-
-// 비동기 관련 액션들을 처리하는 리듀서를 만들어줍니다.
-// type 은 액션의 타입, key 는 상태의 key (예: posts, post) 입니다.
-export const handleAsyncActions = (type, key, keepData=false ) => {
-  const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
-  return (state, action) => {
-    switch (action.type) {
-      case type:
-        return {
-          ...state,
-          [key]: reducerUtils.loading(keepData ? state[key].data: null )
-        };
-      case SUCCESS:
-        return {
-          ...state,
-          [key]: reducerUtils.success(action.payload)
-        };
-      case ERROR:
-        return {
-          ...state,
-          [key]: reducerUtils.error(action.error)
         };
       default:
         return state;
