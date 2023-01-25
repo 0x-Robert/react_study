@@ -58,32 +58,31 @@ export const decrease = () => ({type: DECREASE})
 export const increaseAsync = () => ({ type: INCREASE_ASYNC })
 export const decreaseAsync = () => ({ type: DECREASE_ASYNC })
 
-function* inceraseSaga(){
-    yield delay(1000);    //1초를 기다림
-    yield put(increase()) //put은 특정액션을 디스패치 해줌 
-}
+function* increaseSaga() {
+    yield delay(1000); // 1초를 기다립니다.
+    yield put(increase()); // put은 특정 액션을 디스패치 해줍니다.
+  }
+  function* decreaseSaga() {
+    yield delay(1000); // 1초를 기다립니다.
+    yield put(decrease()); // put은 특정 액션을 디스패치 해줍니다.
+  }
 
-function* deceraseSaga(){
-    yield delay(1000);    //1초를 기다림
-    yield put(decrease()) //put은 특정액션을 디스패치 해줌 
-}
-
-export function* counterSaga(){
-    yield takeEvery(INCREASE_ASYNC, inceraseSaga); //모든 INCREASE_ASYNC 액션을 처리 
-    yield takeLatest(DECREASE_ASYNC, deceraseSaga); // 가장 마지막으로 디스패치된 DECREASE_ASYNC 액션만을 처리 
-}
+  export function* counterSaga() {
+    yield takeEvery(INCREASE_ASYNC, increaseSaga); // 모든 INCREASE_ASYNC 액션을 처리
+    yield takeLatest(DECREASE_ASYNC, decreaseSaga); // 가장 마지막으로 디스패치된 DECREASE_ASYNC 액션만을 처리
+  }
 
 //초기값 상태가 객체가 아니라 그냥 숫자여도 됨
 const initialState = 0; 
 
 
-export default function counter(state = initialState, action){
-    switch(action.type){
-        case INCREASE: 
-            return state + 1;
-        case DECREASE: 
-            return state - 1;
-        default: 
-            return false;   
+export default function counter(state = initialState, action) {
+    switch (action.type) {
+      case INCREASE:
+        return state + 1;
+      case DECREASE:
+        return state - 1;
+      default:
+        return state;
     }
-}
+  }
