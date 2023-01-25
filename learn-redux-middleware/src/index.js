@@ -7,7 +7,7 @@ import './index.css';
 import App from './App';
 
 import reportWebVitals from './reportWebVitals';
-import rootReducer from './modules';
+import rootReducer, { rootSaga } from './modules';
 import {Provider} from "react-redux";
 import { createStore, applyMiddleware } from 'redux';
 //import myLogger from './middlewaress/myLogger';
@@ -18,12 +18,15 @@ import {BrowserRouter } from 'react-router-dom';
 import {Router} from 'react-router-dom';
 import { createBrowserHistory } from '@remix-run/router';
 // import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
-
+import createSagaMiddleware from "redux-saga"
 
 //let history = createBrowserHistory();
 const customHistory = createBrowserHistory();
 //프로젝트에 리덕스를 적용할 때 index.js에서 루트리듀서를 불러와서 새로운 스토어를 만들고
 //provider를 사용해서 프로젝트에 적용함
+
+const sagaMiddleware = createSagaMiddleware() //사가 미들웨어를 만든다. 
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -40,6 +43,7 @@ const store = createStore(
   // logger 를 사용하는 경우, logger가 가장 마지막에 와야합니다.
   composeWithDevTools(applyMiddleware(
     ReduxThunk.withExtraArgument({ history: customHistory }),
+    sagaMiddleware,//사가 미들웨어 적용
     logger
   ))
 ); // 여러개의 미들웨어를 적용 할 수 있습니다.
@@ -47,12 +51,13 @@ const store = createStore(
 //const store = createStore(rootReducer,applyMiddleware( logger));
 //여러개의 미들웨어를 적용할 수 있습니다. 
 
+sagaMiddleware.run(rootSaga); //루트사가를 실행합니다. 
+//주의 스토어 생성이 된 다음에 위 코드를 실행함 
 
 root.render(
   <React.StrictMode>
     <BrowserRouter>
     {/* <Router history={customHistory}/> */}
-
     <Provider store={store}>
     <App />
     </Provider>

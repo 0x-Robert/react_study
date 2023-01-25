@@ -13,6 +13,7 @@
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
+    "redux-saga": "^1.2.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -38,5 +39,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:4000"
 }
