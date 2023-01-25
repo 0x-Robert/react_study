@@ -25,7 +25,12 @@ const customHistory = createBrowserHistory();
 //프로젝트에 리덕스를 적용할 때 index.js에서 루트리듀서를 불러와서 새로운 스토어를 만들고
 //provider를 사용해서 프로젝트에 적용함
 
-const sagaMiddleware = createSagaMiddleware() //사가 미들웨어를 만든다. 
+const sagaMiddleware = createSagaMiddleware({
+  context: {
+    history: customHistory
+  }
+})// 사가 미들웨어를 만든다.
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
