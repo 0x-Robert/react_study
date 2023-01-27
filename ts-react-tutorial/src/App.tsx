@@ -24,14 +24,38 @@
 // }
 
 // export default App;
+// import React from 'react';
+// import Greetings from './Greeting';
+// import Counter from './Counter';
+
+// const App: React.FC = () => {
+//     const onClick = (name:string ) => {
+//         console.log(`${name} says hello`);
+//     };
+//     return <Counter />;
+//     //return<Greetings name="React" onClick={onClick} />;
+// }
+
+// export default App;
+
+// import React from 'react';
+// import MyForm from './MyForm';
+
+// const App: React.FC = () => {
+//   const onSubmit = (form: { name: string; description: string }) => {
+//     console.log(form);
+//   };
+//   return <MyForm onSubmit={onSubmit} />;
+// };
+
+// export default App;
+
+
 import React from 'react';
-import Greetings from './Greeting';
+import ReducerSample from './ReducerSample';
 
 const App: React.FC = () => {
-    const onClick = (name:string ) => {
-        console.log(`${name} says hello`);
-    };
-    return<Greetings name="React" onClick={onClick} />;
-}
+  return <ReducerSample />;
+};
 
 export default App;
