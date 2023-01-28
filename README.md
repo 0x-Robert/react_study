@@ -76,3 +76,7 @@ install
 yarn add react-icons
 yarn add styled-components
 yarn add polished
+
+
+typescript 추가하는 프로젝트 생성은 아래와 같이 커맨드가  변경됐음
+npx create-react-app ts-react-tutorial --template typescript
