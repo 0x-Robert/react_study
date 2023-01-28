@@ -1,7 +1,7 @@
 // import React, { useState } from 'react';
 
 // function Counter() {
-//   const [count, setCount] = useState(0);
+//   const [count, setCount] = useState<number>(0);
 //   const onIncrease = () => setCount(count + 1);
 //   const onDecrease = () => setCount(count - 1);
 //   return (
@@ -17,25 +17,27 @@
 
 // export default Counter;
 
-import React, { useReducer } from 'react';
 
-type Action = { type: 'INCREASE' } | { type: 'DECREASE' }; // 이렇게 액션을 | 으로 연달아서 쭉 나열하세요.
+//useRedcuer를 활용한 couter 
+import React, {useReducer} from "react";
 
-function reducer(state: number, action: Action): number {
-  switch (action.type) {
-    case 'INCREASE':
+type Action = {type : "INCREASE"} | {type: "DECREASE"}; //이렇게 액션을 |로 연달아서 나열하기
+
+function reducer(state: number, action:Action): number{
+  switch(action.type){
+    case "INCREASE":
       return state + 1;
-    case 'DECREASE':
-      return state - 1;
+    case "DECREASE":
+      return state - 1; 
     default:
-      throw new Error('Unhandled action');
+      throw new Error("Unhandled action");
   }
 }
 
-function Counter() {
+function Counter(){
   const [count, dispatch] = useReducer(reducer, 0);
-  const onIncrease = () => dispatch({ type: 'INCREASE' });
-  const onDecrease = () => dispatch({ type: 'DECREASE' });
+  const onIncrease = () => dispatch({type: "INCREASE"});
+  const onDecrease = () => dispatch({type: "DECREASE"});
 
   return (
     <div>
@@ -45,7 +47,8 @@ function Counter() {
         <button onClick={onDecrease}>-1</button>
       </div>
     </div>
-  );
+  )
 }
 
-export default Counter;
+export default Counter; 
+
